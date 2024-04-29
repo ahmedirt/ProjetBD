@@ -4,8 +4,7 @@
 ### Ahmed ismail 23242
 ### Yahya 23227
 ### Description
-<p align="justify">
-Apartment Rental Management System is based on searching the apartments available for rent in cities. The apartment owner updates details of the apartments available for rent and the customer is updated on these details such as area occupied, rent amount, location and so on. This system is best suitable for both owners as well as tenants and is also a best application in the city place. Tenants can easily search the suitable apartment with their preferred location and the rent amount. It also allows the tenants to pay their rent online. The Apartment Rental System helps to save a lot of time for both parties. Hence this system is best applicable for the above reasons making Apartment Rental an easy process through an online system.</p>
+<p align="justify">Le système de gestion de location d'appartements repose sur la recherche des appartements disponibles à la location dans les villes. Le propriétaire d'appartement met à jour les détails des appartements disponibles à la location, et le client est informé de ces détails tels que la surface occupée, le montant du loyer, l'emplacement, etc. Ce système convient parfaitement aussi bien aux propriétaires qu'aux locataires et constitue également la meilleure application dans la ville. Les locataires peuvent facilement rechercher l'appartement adapté à leur emplacement préféré et au montant du loyer. Il permet également aux locataires de payer leur loyer en ligne. Le système de location d'appartements aide à gagner beaucoup de temps pour les deux parties. Par conséquent, ce système est le plus applicable pour les raisons mentionnées ci-dessus, rendant la location d'appartements un processus facile grâce à un système en ligne.</p>
 
 ### Technology Used
 * Front End - HTML, CSS, JavaScript
