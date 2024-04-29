@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>Page de Bienvenue</title>
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/welcomeStyle.css')}}">
+    </head>
+    <body>
+        <div class="bg">
+            <p class="quote">Tournez la clé, franchissez la porte. Cette nouvelle <strong>MAISON</strong> est tout ce que vous avez toujours voulu et plus encore...</p>
+            <p class="heading1">Bienvenue aux Appartements <span class="highlight">RoofTop</span></p>
+            <p class="sub">Style de vie de qualité</p>
+        </div>
+    	<header id="home">
+    		<nav class="navbar">
+    			<div class="container">
+    				<img src="{{url_for('static',filename='images/rooftop1.jpg')}}" class="Roof">
+                    <ul id="checklist">
+                        <li class="menu"><a href="#home">Accueil</a></li>
+                        <li class="menu">
+                            <div class="dropdown">
+                                <span class="signin">Se connecter<i class="fa fa-user-circle-o fa-lg"></i></span>
+                                <div class="dropdown-content">
+                                    <a href="\AdminLogin">Administrateur</a>
+                                    <a href="\TenantLogin">Locataire</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+    		</nav>
+    	</header>
+
+        <script type="text/javascript" src="{{url_for('static',filename='js/welcomeScripts.js')}}"></script>
+
+    </body>
+</html>

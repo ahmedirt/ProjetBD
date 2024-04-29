@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Contrat</title>
+		<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+	    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/contractStyle.css')}}">
+		<style>
+			.btn {
+				width: auto; /* Adjust the width to fit the content */
+				padding: 10px 20px; /* Add padding for better appearance */
+			}
+			.reset {
+				width: auto; /* Adjust the width to fit the content */
+				padding: 10px 20px; /* Add padding for better appearance */
+			}
+			
+		</style>
+	</head>
+	<body>
+		<header> 
+			<nav>
+				<a class="back" href="\Details"><i class="fa-solid fa-arrow-left"></i> CONTRAT</a>
+			</nav>
+		</header>
+		<div class="container">
+			{% if msg7 %}  
+        		<p class="msg">{{msg7}}</p>  
+    		{% endif %}  
+			<div class="box">
+				<h4>CONTRAT DE LOCATION</h4>
+				<form action="{{ url_for('Contract',aptNo=aptNo, Date=Date, Tname=Tname, TFatherName=TFatherName, Uname=Uname, PAddress=PAddress, Date1=Date, rentAmt=rentAmt, Deposit=Deposit) }}" method="post">
+					<p>Ce CONTRAT DE LOCATION est exécuté pour l'appartement <input type="number" value='{{ aptNo }}' name="aptno" class="if5" readonly/>  le <input type="date" value='{{ Date }}' name="date" readonly/>  en ligne par et entre :<br><br>&emsp;&emsp;&emsp;&emsp;Par :
+						<div class="owner-info">
+							<p>Ahmed AD</p>
+							<p>Fils de ABouha</p>
+							<p>'NKTT', V P 1er, nktt, Mauritanie.</p>
+						</div>
+					</p>
+					<p>&emsp;&emsp;&emsp;&emsp;Et, en faveur de :
+			    		<div class="tenant-info">
+			    			<p><input class="if1" type="text" name="TenantName" value='{{ Tname }}'  readonly/></p>
+							<p>Fils ou fille de <input class="if2" type="text" name="tenantfatherName" value='{{ TFatherName }}' readonly/></p>
+							<p><input class="if4" type="email" name="UserName" value='{{ Uname }}' readonly/></p>
+							<p>ayant une adresse permanente à <input class="if4" type="text" name="permanentaddress" value='{{ PAddress }}'  readonly/></p>
+			    		</div>
+					</p>
+					<p>Le Propriétaire est le propriétaire absolu de la propriété située à <u>'Rooftop Apartments', Ahmed Ad, NKTT, Mauritania</u>, tandis que le Locataire a demandé au Propriétaire de lui accorder un loyer pour le logement mentionné au calendrier et le Propriétaire a accepté de louer au Locataire la Propriété avec espace de stationnement pour deux-roues et quatre-roues au rez-de-chaussée à des fins résidentielles uniquement, selon les TERMES et CONDITIONS suivants :</p>
+					<p>1.&emsp;Le loyer relatif au « Logement Démis » commencera le <input type="date" value='{{ Date1 }}' name="start_date" readonly/> et sera valable jusqu'au <input type="date" name="end_date" required/>. Ensuite, il pourra être prolongé sur consentement mutuel des deux parties.</p>
+					<p>2.&emsp;Que le Locataire paiera au Propriétaire un loyer mensuel de Rs.<input class="if6" value='{{ rentAmt }}' type="number" name="rent-amt" readonly/>, hors électricité et facture d'eau. Le loyer sera payé au plus tard le 7ème jour de chaque mois sans faute.</p>
+					<p>3.&emsp;Que pendant la période de location, en plus du montant du loyer payable au Propriétaire, le Locataire paiera pour l'utilisation de l'électricité et de l'eau selon les factures reçues directement des autorités concernées.</p>
+					<p>4.&emsp;Le Locataire versera au Propriétaire un dépôt de garantie remboursable sans intérêt de Rs.<input class="if6" value='{{ Deposit }}' type="number" name="deposit" readonly/> par paiement en ligne daté du <input type="date" value='{{ Date1 }}' name="pay_date"readonly/> au moment de la soumission du Contrat de Location.</p>
+					<p><input type="checkbox" id="terms" name="terms" value="Accepted" style="accent-color: #00203FFF;"> Je suis d'accord avec les termes et conditions énoncés ci-dessus.</p>
+
+					<input type="submit" class="btn" value="Soumettre" /> 
+                    <input type="reset" value='Réinitialiser' class="reset" />
+
+				</form>
+
+			</div class="box">
+		</div>
+	</body>
+</html>

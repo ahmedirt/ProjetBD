@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Page de connexion</title>
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/detailsStyle.css')}}">
+	</head>
+	<body>
+		{% if Error %}  
+        	<p class="error"><strong>Erreur</strong>: {{Error}}</p>  
+    	{% endif %} 
+		<div class="box">
+            <nav class="navbar">
+                <div class="container">
+                    <a href="#" class="lead" onclick="history.back()"><i class="fa fa-arrow-left" style="font-size: 22px;"></i> RETOUR</a>
+                </div>
+            </nav>
+
+    		<div class="formbox">
+    			<h1>Veuillez remplir les détails</h1>
+    			<form action="{{ url_for('Details') }}" method="post">
+    				<p>Nom d'utilisateur : 
+    				<input type="email" name="Username" placeholder="Entrez votre adresse e-mail" required/></p>
+    				<p>Numéro d'appartement : 
+    				<input type="number" name="aptNo" placeholder="  Par exemple : 152" required min=3/></p>
+                    <p>Nom du père : 
+    				<input type="text" name="TFatherName" placeholder="Entrez le nom de votre père" required/></p>
+    				<p>Adresse : 
+    				<input type="text" name="PerAddr" placeholder="Entrez votre adresse permanente" required /></p>
+    				<input type="submit" value="Soumettre"><br>
+    			</form>
+    		</div>
+    	</div>
+
+	</body>
+</html>

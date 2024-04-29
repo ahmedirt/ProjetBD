@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Utilisateurs totaux{% endblock %}
+{% block script %}
+	<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/TotalUsersStyle.css')}}">
+{% endblock %}
+{% block content %} 
+    	<nav class="navbar">
+			<ul class="nav-bar">
+            	<li class="arrow"><a href="/AdminDashboard" class="previous"><i class="fa-solid fa-arrow-left"></i></a></li>
+				<li class="users"><p><i class="fa-solid fa-users"></i> Utilisateurs</p></li>
+				<li class="search"><input type="text" placeholder=" Rechercher ici...." class="live-search-box" /><i class="fa-solid fa-magnifying-glass" style="font-size: 20px;"></i></li>
+				<li class="arrow"><a href="/tenantReport" class="next"><i class="fa-solid fa-arrow-right"></i></a></li>
+			</ul>
+		</nav>
+		<section>
+			<table>
+				<tr> 
+					<th>Prénom</th>
+					<th>Nom de famille</th>
+					<th>Genre</th>  
+					<th>Numéro de téléphone</th> 
+					<th>Email</th>
+					<th>Numéro de l'appartement</th> 
+				</tr> 
+				{% for row in msg5 %}  
+					<tr class="live-search-list">
+						{% for col in row %}
+							<td>{{row[col]}}</td>
+						{% endfor %}
+					</tr> 
+				{% endfor %}
+			</table>
+		</section>
+{% endblock %}
+
+{% block endscript %}
+<script type="text/javascript" src="{{url_for('static',filename='js/AdminDashScripts.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/search.js')}}"></script>
+{% endblock %}

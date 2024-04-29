@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Page de Connexion</title>
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/AdminLoginStyle.css')}}">
+		<script>
+			$(function () {
+				$("#txtName").keypress(function (e) {
+					var keyCode = e.keyCode || e.which;
+	 
+					$("#lblError").html("");
+	 
+					// Regex pour les caractères valides, c'est-à-dire les lettres et les chiffres.
+					var regex = /^[A-Za-z -']+$/;
+	 
+					// Valider la valeur du TextBox par rapport à la Regex.
+					var isValid = regex.test(String.fromCharCode(keyCode));
+					if (!isValid) {
+						$("#lblError").html("Seuls les lettres et les caractères spécifiques sont autorisés.");
+					}
+	 
+					return isValid;
+				});
+			});
+		
+		</script>
+		<style>
+			.reset {
+				width: auto; /* Adjust the width to fit the content */
+				padding: 10px 20px; /* Add padding for better appearance */
+			}
+	</style>
+	</head>
+	<body>
+		{% if error %}  
+        	<p id="lblError" class="error"><strong>Erreur</strong>: {{error}}</p>  
+    	{% endif %} 
+		{% if log2 %}  
+        	<p class="log">{{log2}}</p>  
+    	{% endif %}  
+		<div class="box">
+            <nav class="navbar">
+                <div class="container">
+                    <a href="/" class="lead"><i class="fa fa-arrow-left"></i> RETOUR</a>
+                </div>
+            </nav>
+
+    		<div class="loginbox">
+    			<img src="{{url_for('static',filename='images/admin_icon.jpg')}}" class="user">
+    			<h1>Connexion Administrateur</h1>
+    			<form action="{{ url_for('AdminLogin') }}" method="post">
+    				<p>Nom d'utilisateur : </p>
+    				<input type="text" id="txtName" name="adminUsername" placeholder="Entrez le nom d'utilisateur" required/>
+    				<p>Mot de passe : </p>
+    				<input type="password" name="adminPass" placeholder="Entrez le mot de passe" required/>
+                    <p>Mot de passe de sécurité : </p>
+                    <input type="password" name="securityPass" placeholder="Entrez le mot de passe de sécurité" required/>
+    				<input type="submit" value="Se Connecter" class="reset"><br>
+    			</form>
+    		</div>
+    	</div>
+
+	</body>
+</html>
