@@ -20,7 +20,7 @@ app.config['MYSQL_HOST'] = 'localhost' #hostname
 app.config['MYSQL_USER'] = 'root' #username
 app.config['MYSQL_PASSWORD'] = '' #password
 #in my case password is null so i am keeping empty
-app.config['MYSQL_DB'] = 'apartmentRental' #database name
+app.config['MYSQL_DB'] = 'GestionApparment' #database name
 # Intialize MySQL
 mysql = MySQL(app)
            
@@ -34,8 +34,8 @@ def AdminLogin() :
     error = None
     if request.method == 'POST' and 'adminUsername' in request.form and 'adminPass' in request.form and 'securityPass' in request.form:
         if request.form['adminUsername'] != 'admin' or \
-                request.form['adminPass'] != 'ahmed@123' or \
-                request.form['securityPass'] != 'apartment':
+                request.form['adminPass'] != 'ahmed@1234' or \
+                request.form['securityPass'] != 'ahmed':
             error = 'Invalid credentials'
         else:
             flash('You have logged in successfully!!')
@@ -148,11 +148,11 @@ def AdminDashboard() :
     mysql.connection.commit()
     result2=cursor.fetchone()
     t_tenants = result2['T_TENANTS'] 
-    cursor.execute('SELECT COUNT(ROOM_NO) AS T_APTS FROM APARTMENT WHERE APT_STATUS = "Occupied"')
+    cursor.execute('SELECT COUNT(ROOM_NO) AS T_APTS FROM APARTMENT WHERE APT_STATUS = "Occupe"')
     mysql.connection.commit()
     result3=cursor.fetchone()
     occ_apts = result3['T_APTS'] 
-    cursor.execute('SELECT COUNT(ROOM_NO) AS T_APTS FROM APARTMENT WHERE APT_STATUS = "Unoccupied"')
+    cursor.execute('SELECT COUNT(ROOM_NO) AS T_APTS FROM APARTMENT WHERE APT_STATUS = "Inoccupe"')
     mysql.connection.commit()
     result4=cursor.fetchone()
     unocc_apts = result4['T_APTS']  
@@ -161,7 +161,7 @@ def AdminDashboard() :
     mysql.connection.commit()
     result5=cursor.fetchone()
     tot_blck = result5['T_BLOCK']
-    cursor.execute('SELECT SUM(R.RENT_FEE) AS T_RENT FROM RENT AS R, RENT_STATUS AS S WHERE R.RENT_ID = S.RENT_ID AND S.R_STATUS = "Paid"')
+    cursor.execute('SELECT SUM(R.RENT_FEE) AS T_RENT FROM RENT AS R, RENT_STATUS AS S WHERE R.RENT_ID = S.RENT_ID AND S.R_STATUS = "paye"')
     mysql.connection.commit()
     result6=cursor.fetchone()
     tot_rent = result6['T_RENT'] 
@@ -260,7 +260,7 @@ def ApartmentRooms() :
             msg2 = 'You have successfully added an Apartment !'
     elif request.method == 'POST':
         msg2 = 'Please fill out the form !'
-    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Unoccupied"')
+    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Inoccupe"')
     mysql.connection.commit()
     msg3=cursor.fetchall()
     cursor.execute('SELECT * FROM APARTMENT_PHOTOS')
@@ -297,7 +297,7 @@ def UpdateApartment():
             msg2 = 'Apartment doesn\'t exists !'
     elif request.method == 'POST':
         msg2 = 'Please fill out the form !'
-    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Unoccupied"')
+    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Inoccupe"')
     mysql.connection.commit()
     msg3=cursor.fetchall() 
     cursor.execute('SELECT * FROM APARTMENT_PHOTOS')
@@ -333,7 +333,7 @@ def DeleteApartment() :
             msg2 = 'Apartment doesn\'t exists !'
     elif request.method == 'POST':
         msg2 = 'Please fill out the form !'
-    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Unoccupied"')
+    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Inoccupe"')
     mysql.connection.commit()
     msg3=cursor.fetchall() 
     cursor.execute('SELECT * FROM APARTMENT_PHOTOS')
@@ -388,7 +388,7 @@ def TenantDashboard() :
 @app.route('/RentApartment')
 def rentApartment() :
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Unoccupied"')
+    cursor.execute('SELECT APT_TITLE, A.ROOM_NO, AREA, RENT_PER_MONTH, APARTMENT_DESC FROM APARTMENT AS A, APARTMENT_DETAILS AS AD WHERE A.ROOM_NO = AD.ROOM_NO AND A.APT_STATUS = "Inoccupe"')
     mysql.connection.commit()
     apartment=cursor.fetchall()
     cursor.execute('SELECT * FROM APARTMENT_PHOTOS')
@@ -419,7 +419,7 @@ def Details() :
         mysql.connection.commit()
         tid_list1 = cursor.fetchone()
         t_id = tid_list1['T_ID']
-        cursor.execute('SELECT RENT_PER_MONTH FROM APARTMENT WHERE ROOM_NO = %s AND APT_STATUS = "Unoccupied"',(aptNo,))
+        cursor.execute('SELECT RENT_PER_MONTH FROM APARTMENT WHERE ROOM_NO = %s AND APT_STATUS = "Inoccupe"',(aptNo,))
         mysql.connection.commit()
         res1 = cursor.fetchone()
         if t_id != None and res1 != None :
@@ -464,7 +464,7 @@ def alreadyTenant() :
         late_fee = latefee_list['LATE_FEE']
         totAmt = int(rentAmt) + int(late_fee)
         # PhNo='9876543212'
-        cursor.execute('SELECT RENT_PER_MONTH FROM APARTMENT WHERE ROOM_NO = %s AND APT_STATUS = "Occupied"',(aptNo,))
+        cursor.execute('SELECT RENT_PER_MONTH FROM APARTMENT WHERE ROOM_NO = %s AND APT_STATUS = "Occupe"',(aptNo,))
         mysql.connection.commit()
         res1 = cursor.fetchone()
         if t_id != None and res1 != None :
@@ -519,9 +519,9 @@ def Contract(aptNo,Tname, TFatherName, Uname, PAddress, Date, rentAmt, Deposit) 
         mysql.connection.commit()
         rent_id_list = cursor.fetchone()
         rent_id = rent_id_list['RENT_ID']
-        cursor.execute('INSERT INTO RENT_STATUS VALUES ( % s, % s)', (rent_id,'Unpaid'))
+        cursor.execute('INSERT INTO RENT_STATUS VALUES ( % s, % s)', (rent_id,'impaye'))
         cursor.execute('UPDATE TENANT SET ROOM_NO = % s WHERE T_ID = % s',(Apt_no,T_id))
-        cursor.execute('UPDATE APARTMENT SET APT_STATUS = "Occupied" WHERE ROOM_NO = % s',(Apt_no,))
+        cursor.execute('UPDATE APARTMENT SET APT_STATUS = "Occupe" WHERE ROOM_NO = % s',(Apt_no,))
         mysql.connection.commit()
         cursor.execute('SELECT PH_NO FROM TENANT WHERE T_ID = % s',(T_id,))
         mysql.connection.commit()
@@ -566,7 +566,7 @@ def Payment(aptNo,Tname,PhNo, Uname, rentAmt, late_fee, totAmt) :
         if t_id != None and aptNo != None :
             cursor.execute('INSERT INTO PAYMENT VALUES(% s, % s, % s, % s, % s)',(pay_id,Acc_No,t_id,Date,rentAmt))
             cursor.execute('UPDATE RENT SET PAYMENT_ID = % s WHERE RENT_ID = % s',(pay_id, rent_id))
-            cursor.execute('UPDATE RENT_STATUS SET R_STATUS = "Paid" WHERE RENT_ID = % s',(rent_id,))
+            cursor.execute('UPDATE RENT_STATUS SET R_STATUS = "paye" WHERE RENT_ID = % s',(rent_id,))
             mysql.connection.commit()
             pay_amt = rentAmt
             return redirect(url_for('Receipt',Tname=Tname, pay_id=pay_id, pay_date=pay_date ,pay_amt=pay_amt))
@@ -599,7 +599,7 @@ def Payment1(aptNo,Tname,PhNo, Uname, rentAmt, late_fee, totAmt) :
         if t_id != None and aptNo != None :
             cursor.execute('INSERT INTO PAYMENT VALUES(% s, % s, % s, % s, % s)',(pay_id,Acc_No,t_id,Date,rentAmt))
             cursor.execute('UPDATE RENT SET PAYMENT_ID = % s WHERE RENT_ID = % s',(pay_id, rent_id))
-            cursor.execute('UPDATE RENT_STATUS SET R_STATUS = "Paid" WHERE RENT_ID = % s',(rent_id,))
+            cursor.execute('UPDATE RENT_STATUS SET R_STATUS = "paye" WHERE RENT_ID = % s',(rent_id,))
             mysql.connection.commit()
             pay_amt = rentAmt
             return redirect(url_for('Receipt',Tname=Tname, pay_id=pay_id, pay_date=pay_date ,pay_amt=pay_amt))

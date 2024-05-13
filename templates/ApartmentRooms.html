@@ -96,7 +96,7 @@
                                         <label class="l1">Numéro de Chambre : </label>
                                         <input class="lf1" type="number" placeholder=" Exemple: 312" name="room1" required/>
                                         <label class="l2">Statut : </label>
-                                        <input class="lf2" type="text" placeholder="Occupé/Inoccupé" name="status1"  required/>
+                                        <input class="lf2" type="text" placeholder="Occupe/Inoccupe" name="status1"  required/>
                                     </div>
 									<div class="input-field">
                                         <label for="up_area" style="padding-left:30px">Surface : </label>
@@ -165,8 +165,8 @@
                                     {% if msg3Row['AREA'] %}
                                         Surface : <span style="padding-right:20px"> {{ msg3Row['AREA'] }} Pieds carrés.</span>
                                     {% endif %}
-                                    {% if msg3Row['RENT_PER_MONTH'] %}
-                                        Loyer : <span><i class="fa-solid fa-indian-rupee-sign"></i> {{ msg3Row['RENT_PER_MONTH'] }}</span>
+                                    {% if msg3Row['RENT_PER_MONTH'] %} <br><br>
+                                        Loyer : <span><i class="fa-solid fa-indian-rupee-sign"></i> {{ msg3Row['RENT_PER_MONTH'] }} MRU</span>
                                     {% endif %}
                                 </p>
                                 {% if msg3Row['APARTMENT_DESC'] %}  
